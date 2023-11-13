@@ -1,0 +1,18 @@
+﻿- DataAccessLayer
+Microsoft.EntityFrameworkCore.Tools(6.0.24)
+Microsoft.EntityFrameworkCore.Design(6.0.24)
+Microsoft.EntityFrameworkCore.SqlServer(6.0.24)
+Microsoft.EntityFrameworkCore.Core(6.0.24)
+-WebApi
+Microsoft.EntityFrameworkCore.Design(6.0.24)
+
+
+
+Referans Tablosu 
+							 DataAccessLayer --> EntityLayer
+		   BusinessLayer --> DataAccessLayer --> EntityLayer
+WebAPI --> BusinessLayer --> DataAccessLayer --> EntityLayer
+
+
+Yeni bir metod yazılacaksa ekstra olarak önce genericDal içine yazılır sonra generic repositorye yazılır ve içi doldurulur.
+
