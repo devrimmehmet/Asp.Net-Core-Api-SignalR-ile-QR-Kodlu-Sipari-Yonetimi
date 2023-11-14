@@ -16,3 +16,14 @@ WebAPI --> BusinessLayer --> DataAccessLayer --> EntityLayer
 
 Yeni bir metod yazılacaksa ekstra olarak önce genericDal içine yazılır sonra generic repositorye yazılır ve içi doldurulur.
 
+Entity Katmanı : Sql'e yansıtmak üzere hazırladığımız sınıflarımız. Tanıtılan Propertyler Sqlde bir kolona dönüşür.
+Business Katmanı : İş katmanı olarak bilinir. Yetki kontrolleri yapılır. (Fluent Validasyon vb.)
+DataAccess Katmanı : Repository<T> yapısı tercih edildi. (Crud İşlemleri Yapılır.)
+Presentation Katmanı : UI katmanı olarak bilinir. Projenin sunum bölümüdür.
+DTO Katmanı : (Data Transfer Object) Bütün bir entity çağırmak yerine sadece istediğimiz propertyleri çağırmak için yazılan modellerdir.(Solide uygunluk için.)
+
+Access Modifier:
+		Public : Herkese Açık (Bütün solution üzerinden ulaşılabilir)
+		Protected : İlgili sınıftan ve o sınıfı miras alan yerlerden ulaşılabilir.
+		Internal : Sadece bulunduğu katmandan erişilebilir.
+		Private : Sadece bulunduğu sınıf yada interface üzerinden erişilebilir.
