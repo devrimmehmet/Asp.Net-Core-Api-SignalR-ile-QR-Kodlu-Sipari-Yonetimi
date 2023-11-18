@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(RestaurantDbContext))]
-    [Migration("20231113030821_Initialize")]
-    partial class Initialize
+    [Migration("20231118151200_InitialStart")]
+    partial class InitialStart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,6 +100,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Contact_ID"), 1L, 1);
+
+                    b.Property<string>("Contact_Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Contact_Location")
                         .HasColumnType("nvarchar(max)");
@@ -188,6 +191,9 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Product_ID"), 1L, 1);
 
+                    b.Property<int?>("Category_ID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Product_Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -204,6 +210,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Product_ID");
+
+                    b.HasIndex("Category_ID");
 
                     b.ToTable("Products");
                 });
@@ -256,6 +264,18 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("Testimonial_ID");
 
                     b.ToTable("Testimonials");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Product", b =>
+                {
+                    b.HasOne("EntityLayer.Entities.Category", null)
+                        .WithMany("Products")
+                        .HasForeignKey("Category_ID");
+                });
+
+            modelBuilder.Entity("EntityLayer.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

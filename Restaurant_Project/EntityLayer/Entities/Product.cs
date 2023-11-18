@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EntityLayer.Entities
 {
@@ -11,5 +12,7 @@ namespace EntityLayer.Entities
         public decimal Product_Price { get; set; }
         public string? Product_Image_Url { get; set; }
         public bool Product_Status { get; set; }
+        [ForeignKey("Category_ID")] // Burada "Category" string'i, Category sınıfındaki navigation property ismini ifade etmelidir.
+        public Category? Category { get; set; }
     }
 }

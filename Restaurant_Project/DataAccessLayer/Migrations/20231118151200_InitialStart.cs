@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class InitialStart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,7 @@ namespace DataAccessLayer.Migrations
                 {
                     Contact_ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Contact_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact_Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact_Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact_Mail = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -108,23 +109,6 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Product_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Product_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Product_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Product_Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Product_Image_Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Product_Status = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Product_ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SocialMedias",
                 columns: table => new
                 {
@@ -155,6 +139,34 @@ namespace DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_Testimonials", x => x.Testimonial_ID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Product_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Product_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Product_Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Product_Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Product_Image_Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Product_Status = table.Column<bool>(type: "bit", nullable: false),
+                    Category_ID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Product_ID);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_Category_ID",
+                        column: x => x.Category_ID,
+                        principalTable: "Categories",
+                        principalColumn: "Category_ID");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_Category_ID",
+                table: "Products",
+                column: "Category_ID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -164,9 +176,6 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Bookings");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Contacts");
@@ -185,6 +194,9 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Testimonials");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

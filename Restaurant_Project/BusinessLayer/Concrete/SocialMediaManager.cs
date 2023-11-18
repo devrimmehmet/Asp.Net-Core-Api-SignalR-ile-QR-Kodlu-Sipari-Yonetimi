@@ -4,7 +4,7 @@ using EntityLayer.Entities;
 
 namespace BusinessLayer.Concrete
 {
-    internal class SocialMediaManager : ISocialMediaService
+    public class SocialMediaManager : ISocialMediaService
     {
         private readonly ISocialMediaDal _socialMediaDal;
 

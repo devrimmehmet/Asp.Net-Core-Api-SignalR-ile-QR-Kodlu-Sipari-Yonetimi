@@ -9,9 +9,11 @@ Microsoft.EntityFrameworkCore.Design(6.0.24)
 
 
 Referans Tablosu 
-							 DataAccessLayer --> EntityLayer
+							 DataAccessLayer --> EntityLayer 
+							 DataAccessLayer --> DtoLayer 
 		   BusinessLayer --> DataAccessLayer --> EntityLayer
 WebAPI --> BusinessLayer --> DataAccessLayer --> EntityLayer
+WebAPI --> DtoLayer ; Mapping için gerekli olacak.
 
 
 Yeni bir metod yazılacaksa ekstra olarak önce genericDal içine yazılır sonra generic repositorye yazılır ve içi doldurulur.
@@ -27,3 +29,13 @@ Access Modifier:
 		Protected : İlgili sınıftan ve o sınıfı miras alan yerlerden ulaşılabilir.
 		Internal : Sadece bulunduğu katmandan erişilebilir.
 		Private : Sadece bulunduğu sınıf yada interface üzerinden erişilebilir.
+
+---
+
+WEBAPI katmanına eklenen Kütüphaneler
+AutoMapper (12.0.1)
+AutoMapper.Extensions.Microsoft.DependencyInjection (12.0.1)
+
+Bu kütüphanenin amacı entitydeki modellerimizin DTOdaki modellerimizle eşleşmesini ve tekrar tanımlamadan kurtulmaktır amaç.
+
+---

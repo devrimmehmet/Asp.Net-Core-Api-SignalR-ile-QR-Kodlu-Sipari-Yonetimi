@@ -1,4 +1,4 @@
-﻿namespace DtoLayer.Booking
+﻿namespace DtoLayer.BookingDto
 {
     public class GetBookingDto
     {

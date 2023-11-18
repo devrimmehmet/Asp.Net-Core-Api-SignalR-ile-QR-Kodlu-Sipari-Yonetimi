@@ -1,4 +1,4 @@
-﻿namespace DtoLayer.About
+﻿namespace DtoLayer.AboutDto
 {
     public class ResultAboutDto
     {

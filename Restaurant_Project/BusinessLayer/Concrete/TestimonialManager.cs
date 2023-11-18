@@ -4,7 +4,7 @@ using EntityLayer.Entities;
 
 namespace BusinessLayer.Concrete
 {
-    internal class TestimonialManager : ITestimonialService
+    public class TestimonialManager : ITestimonialService
     {
         private readonly ITestimonialDal _testimonialDal;
 

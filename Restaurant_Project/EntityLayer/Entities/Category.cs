@@ -8,5 +8,8 @@ namespace EntityLayer.Entities
         public int Category_ID { get; set; }
         public string? Category_Name { get; set; }
         public bool Category_Status { get; set; }
+
+        // İki yönlü ilişkiyi ifade eden özellik
+        public List<Product>? Products { get; set; }
     }
 }
